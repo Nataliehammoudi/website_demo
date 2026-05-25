@@ -1,0 +1,445 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); }
+
+  .site { background: #faf7f2; color: #2a2118; }
+
+  .nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 2.5rem;
+    background: #faf7f2;
+    border-bottom: 0.5px solid #d9cfc0;
+    position: sticky; top: 0; z-index: 10;
+  }
+  .nav-logo {
+    font-size: 20px; font-weight: 500; letter-spacing: 0.04em; color: #3d2c1e;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-logo span { color: #8b6a3e; }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-size: 14px; color: #6b5742; text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .nav-links a:hover { color: #3d2c1e; }
+  .nav-cta {
+    background: #3d2c1e; color: #faf7f2;
+    border: none; padding: 0.5rem 1.25rem;
+    border-radius: 99px; font-size: 13px; cursor: pointer;
+    font-family: var(--font-sans); letter-spacing: 0.02em;
+  }
+
+  .hero {
+    padding: 5rem 2.5rem 4rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+    align-items: center; max-width: 1100px; margin: 0 auto;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: #e8ddd0; color: #6b4f32;
+    font-size: 12px; padding: 4px 14px; border-radius: 99px;
+    letter-spacing: 0.05em; margin-bottom: 1.25rem;
+  }
+  .hero h1 {
+    font-size: 42px; font-weight: 500; line-height: 1.2;
+    color: #2a1f14; margin-bottom: 1.25rem;
+  }
+  .hero h1 em { font-style: normal; color: #8b6a3e; }
+  .hero p {
+    font-size: 16px; color: #6b5742; line-height: 1.75;
+    margin-bottom: 2rem;
+  }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    background: #3d2c1e; color: #faf7f2;
+    border: none; padding: 0.75rem 1.75rem;
+    border-radius: 99px; font-size: 14px; cursor: pointer;
+    font-family: var(--font-sans);
+  }
+  .btn-outline {
+    background: transparent; color: #3d2c1e;
+    border: 1px solid #b8a48c; padding: 0.75rem 1.75rem;
+    border-radius: 99px; font-size: 14px; cursor: pointer;
+    font-family: var(--font-sans);
+  }
+
+  .hero-visual {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  }
+  .hero-img {
+    border-radius: 12px; overflow: hidden;
+    aspect-ratio: 3/4; background: #e8ddd0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px; position: relative;
+  }
+  .hero-img:first-child { margin-top: 2rem; }
+  .hero-img.tall { aspect-ratio: 3/5; }
+  .img-label {
+    position: absolute; bottom: 10px; left: 10px;
+    background: rgba(250,247,242,0.88); color: #3d2c1e;
+    font-size: 11px; padding: 3px 10px; border-radius: 99px;
+    letter-spacing: 0.03em;
+  }
+
+  .section-title {
+    text-align: center; margin-bottom: 3rem;
+  }
+  .section-title .tag {
+    display: inline-block;
+    background: #e8ddd0; color: #6b4f32;
+    font-size: 12px; padding: 4px 14px; border-radius: 99px;
+    letter-spacing: 0.05em; margin-bottom: 0.75rem;
+  }
+  .section-title h2 {
+    font-size: 30px; font-weight: 500; color: #2a1f14;
+  }
+
+  .services { background: #f3ede3; padding: 4rem 2.5rem; }
+  .services-inner { max-width: 1100px; margin: 0 auto; }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .service-card {
+    background: #faf7f2; border-radius: 16px;
+    padding: 1.5rem; border: 0.5px solid #d9cfc0;
+  }
+  .service-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-bottom: 1rem;
+  }
+  .service-card h3 { font-size: 15px; font-weight: 500; color: #2a1f14; margin-bottom: 6px; }
+  .service-card p { font-size: 13px; color: #7a6352; line-height: 1.6; }
+  .service-tag {
+    display: inline-block; margin-top: 10px;
+    background: #e8ddd0; color: #6b4f32;
+    font-size: 11px; padding: 3px 10px; border-radius: 99px;
+  }
+
+  .gallery { padding: 4rem 2.5rem; background: #faf7f2; }
+  .gallery-inner { max-width: 1100px; margin: 0 auto; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 200px 200px;
+    gap: 10px;
+  }
+  .gal-item {
+    border-radius: 12px; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; position: relative;
+  }
+  .gal-item:first-child { grid-row: 1 / 3; font-size: 48px; }
+  .gal-label {
+    position: absolute; bottom: 10px; left: 12px;
+    font-size: 12px; font-weight: 500; color: #faf7f2;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  }
+
+  .why { background: #2a1f14; padding: 4rem 2.5rem; }
+  .why-inner { max-width: 1100px; margin: 0 auto; }
+  .why .section-title .tag { background: #3d2c1e; color: #d9cfc0; }
+  .why .section-title h2 { color: #f0e8da; }
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+  .why-item { padding: 1.5rem; border: 0.5px solid #4a3828; border-radius: 14px; }
+  .why-num { font-size: 32px; font-weight: 500; color: #8b6a3e; margin-bottom: 8px; }
+  .why-item h4 { font-size: 15px; font-weight: 500; color: #f0e8da; margin-bottom: 6px; }
+  .why-item p { font-size: 13px; color: #b8a48c; line-height: 1.65; }
+
+  .testimonials { padding: 4rem 2.5rem; background: #f3ede3; }
+  .test-inner { max-width: 1100px; margin: 0 auto; }
+  .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .test-card {
+    background: #faf7f2; border-radius: 14px;
+    padding: 1.5rem; border: 0.5px solid #d9cfc0;
+  }
+  .test-stars { color: #c48b3a; font-size: 13px; margin-bottom: 10px; }
+  .test-text { font-size: 14px; color: #4a3828; line-height: 1.7; margin-bottom: 14px; }
+  .test-author { display: flex; align-items: center; gap: 10px; }
+  .test-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 500; color: #faf7f2;
+  }
+  .test-name { font-size: 13px; font-weight: 500; color: #2a1f14; }
+  .test-meta { font-size: 12px; color: #7a6352; }
+
+  .cta-section {
+    padding: 4rem 2.5rem; background: #faf7f2; text-align: center;
+  }
+  .cta-box {
+    max-width: 600px; margin: 0 auto;
+    background: #f3ede3; border-radius: 20px;
+    padding: 3rem 2rem; border: 0.5px solid #d9cfc0;
+  }
+  .cta-box h2 { font-size: 26px; font-weight: 500; color: #2a1f14; margin-bottom: 1rem; }
+  .cta-box p { font-size: 15px; color: #6b5742; line-height: 1.7; margin-bottom: 2rem; }
+  .cta-input-row { display: flex; gap: 8px; }
+  .cta-input-row input {
+    flex: 1; background: #faf7f2; border: 0.5px solid #c4b49c;
+    border-radius: 99px; padding: 0.7rem 1.25rem;
+    font-size: 14px; font-family: var(--font-sans); color: #2a1f14;
+    outline: none;
+  }
+  .cta-input-row input::placeholder { color: #b8a48c; }
+  .cta-input-row button {
+    background: #3d2c1e; color: #faf7f2;
+    border: none; border-radius: 99px;
+    padding: 0.7rem 1.5rem; font-size: 14px; cursor: pointer;
+    font-family: var(--font-sans); white-space: nowrap;
+  }
+
+  .footer {
+    padding: 2rem 2.5rem; background: #2a1f14;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-logo { font-size: 16px; font-weight: 500; color: #d9cfc0; letter-spacing: 0.04em; }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { font-size: 13px; color: #8b7a68; text-decoration: none; }
+  .footer-copy { font-size: 12px; color: #6b5742; }
+
+  .arabic-accent { font-size: 11px; color: #8b6a3e; letter-spacing: 0.03em; }
+</style>
+
+<div class="site">
+
+  <nav class="nav">
+    <div class="nav-logo">
+      <i class="ti ti-needle-thread" aria-hidden="true" style="font-size:20px; color:#8b6a3e;"></i>
+      <span>ورشة</span> &nbsp;studio
+    </div>
+    <div class="nav-links">
+      <a href="#">Workshops</a>
+      <a href="#">Gallery</a>
+      <a href="#">About</a>
+      <a href="#">Host us</a>
+    </div>
+    <button class="nav-cta">Book a seat</button>
+  </nav>
+
+  <div class="site" style="padding-bottom:0;">
+
+    <section class="hero">
+      <div>
+        <div class="hero-tag">🕯 Hands on. Heart in.</div>
+        <h1>Make something <em>real</em> with your own hands</h1>
+        <p>Creative workshops across Jordan, from cake decorating and Arabic calligraphy to crochet and botanical candles. Hosted in the cafes and spaces you already love.</p>
+        <div class="hero-btns">
+          <button class="btn-primary">Explore workshops</button>
+          <button class="btn-outline">For cafes and venues</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-img" style="background: #d4c5a9;">
+          🕯
+          <span class="img-label">Candle making</span>
+        </div>
+        <div class="hero-img tall" style="background: #c9b99a;">
+          🪡
+          <span class="img-label">Crochet</span>
+        </div>
+        <div class="hero-img" style="background: #e0d4c0; margin-top: 2rem;">
+          🎨
+          <span class="img-label">Watercolour</span>
+        </div>
+        <div class="hero-img tall" style="background: #bda98e;">
+          🍰
+          <span class="img-label">Cake art</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="services">
+      <div class="services-inner">
+        <div class="section-title">
+          <div class="tag">ما نقدّمه</div>
+          <h2>Every workshop, a new skill</h2>
+        </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon" style="background:#f3ede3;">🍰</div>
+            <h3>Cake decoration</h3>
+            <p>Learn buttercream textures, floral piping, and artistic finishing from scratch.</p>
+            <span class="service-tag">Beginner friendly</span>
+          </div>
+          <div class="service-card">
+            <div class="service-icon" style="background:#e8f0e8;">🪴</div>
+            <h3>Botanical candles</h3>
+            <p>Embed dried herbs and flowers in hand-poured soy wax. Yours to take home.</p>
+            <span class="service-tag">2 hrs</span>
+          </div>
+          <div class="service-card">
+            <div class="service-icon" style="background:#e8e4f0;">🖋</div>
+            <h3>Arabic calligraphy</h3>
+            <p>Classic Ruqah and Thuluth scripts on ceramic tiles and wood panels.</p>
+            <span class="service-tag">All levels</span>
+          </div>
+          <div class="service-card">
+            <div class="service-icon" style="background:#f0ebe3;">🪡</div>
+            <h3>Crochet basics</h3>
+            <p>Chain stitches to full mini-bags. Calm, social, and deeply satisfying.</p>
+            <span class="service-tag">Cozy vibes</span>
+          </div>
+          <div class="service-card">
+            <div class="service-icon" style="background:#f0e8e8;">🧪</div>
+            <h3>Perfume blending</h3>
+            <p>Combine oriental and western fragrance notes to create your signature scent.</p>
+            <span class="service-tag">Unique</span>
+          </div>
+          <div class="service-card">
+            <div class="service-icon" style="background:#e8ede8;">🌿</div>
+            <h3>Pressed botanicals</h3>
+            <p>Press, dry, and frame flowers into art cards and resin jewelry pieces.</p>
+            <span class="service-tag">Meditative</span>
+          </div>
+          <div class="service-card">
+            <div class="service-icon" style="background:#ece8f0;">🧱</div>
+            <h3>Mosaic art</h3>
+            <p>Islamic geometric patterns in tile and glass. Bold, ancient, beautiful.</p>
+            <span class="service-tag">3 hrs</span>
+          </div>
+          <div class="service-card">
+            <div class="service-icon" style="background:#f0ece3;">🎨</div>
+            <h3>Watercolour painting</h3>
+            <p>Soft washes, floral studies, and loose landscapes. No experience needed.</p>
+            <span class="service-tag">Relaxing</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery">
+      <div class="gallery-inner">
+        <div class="section-title">
+          <div class="tag">لحظاتنا</div>
+          <h2>Inside our workshops</h2>
+        </div>
+        <div class="gallery-grid">
+          <div class="gal-item" style="background: linear-gradient(135deg, #c9b99a, #a8916e);">
+            <span style="font-size:52px;">🕯</span>
+            <span class="gal-label">Botanical candle session</span>
+          </div>
+          <div class="gal-item" style="background: #d4c5a9;">
+            <span>🖋</span>
+            <span class="gal-label">Calligraphy on tile</span>
+          </div>
+          <div class="gal-item" style="background: #c2b4a0;">
+            <span>🍰</span>
+            <span class="gal-label">Cake decoration</span>
+          </div>
+          <div class="gal-item" style="background: #bfae99;">
+            <span>🪡</span>
+            <span class="gal-label">Crochet evening</span>
+          </div>
+          <div class="gal-item" style="background: #cdc0ad;">
+            <span>🌿</span>
+            <span class="gal-label">Pressed flowers</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="why">
+      <div class="why-inner">
+        <div class="section-title">
+          <div class="tag">لماذا نحن</div>
+          <h2 style="color:#f0e8da;">Why it works</h2>
+        </div>
+        <div class="why-grid">
+          <div class="why-item">
+            <div class="why-num">01</div>
+            <h4>We bring everything</h4>
+            <p>Materials, tools, setup, and instruction. The venue brings the atmosphere. That is it.</p>
+          </div>
+          <div class="why-item">
+            <div class="why-num">02</div>
+            <h4>Small, intentional groups</h4>
+            <p>Max 15 people per session. Enough for energy, small enough for everyone to feel seen.</p>
+          </div>
+          <div class="why-item">
+            <div class="why-num">03</div>
+            <h4>Arabic at heart</h4>
+            <p>Our workshops root themselves in the region, its craft traditions, language, and aesthetics.</p>
+          </div>
+          <div class="why-item">
+            <div class="why-num">04</div>
+            <h4>A memory, not just a class</h4>
+            <p>Participants leave with something they made. That is the whole point.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials">
+      <div class="test-inner">
+        <div class="section-title">
+          <div class="tag">آراؤهم</div>
+          <h2>What people say</h2>
+        </div>
+        <div class="test-grid">
+          <div class="test-card">
+            <div class="test-stars">★★★★★</div>
+            <p class="test-text">"I came for the candle workshop expecting a craft class. I left having made three new friends and a candle I still have not lit because it is too pretty."</p>
+            <div class="test-author">
+              <div class="test-avatar" style="background:#8b6a3e;">ر</div>
+              <div>
+                <div class="test-name">Rima A.</div>
+                <div class="test-meta">Botanical candles</div>
+              </div>
+            </div>
+          </div>
+          <div class="test-card">
+            <div class="test-stars">★★★★★</div>
+            <p class="test-text">"The calligraphy session was everything. The instructor was patient, the space was beautiful, and I actually managed to write something I am proud of."</p>
+            <div class="test-author">
+              <div class="test-avatar" style="background:#5a7a5a;">خ</div>
+              <div>
+                <div class="test-name">Khaled M.</div>
+                <div class="test-meta">Arabic calligraphy</div>
+              </div>
+            </div>
+          </div>
+          <div class="test-card">
+            <div class="test-stars">★★★★★</div>
+            <p class="test-text">"I have been to three workshops now and each one feels completely different. The cake decorating one was so much fun, I am already signed up for perfume blending."</p>
+            <div class="test-author">
+              <div class="test-avatar" style="background:#7a5a8a;">س</div>
+              <div>
+                <div class="test-name">Sara H.</div>
+                <div class="test-meta">Regular attendee</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="cta-box">
+        <div style="font-size:28px; margin-bottom:1rem;">✉️</div>
+        <h2>Get notified first</h2>
+        <p>New workshops drop regularly. Be the first to know and grab your spot before they fill up.</p>
+        <div class="cta-input-row">
+          <input type="email" placeholder="your email" />
+          <button>Notify me</button>
+        </div>
+        <p style="font-size:12px; color:#b8a48c; margin-top:12px;">No spam. Only workshops worth your time.</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-logo"><span style="color:#8b6a3e;">ورشة</span> studio</div>
+      <div class="footer-links">
+        <a href="#">Workshops</a>
+        <a href="#">Host us</a>
+        <a href="#">Instagram</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-copy">Amman, Jordan</div>
+    </footer>
+
+  </div>
+</div>
